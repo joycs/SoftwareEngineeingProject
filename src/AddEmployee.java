@@ -1,10 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-public class AddEmployee extends CFrame {
+public class AddEmployee extends CFrame implements ActionListener{
 	JLabel lblTitle,lblId,lblFname,lblLname,lblDepartment,lblGender,lblNationality,lblEmail,lblPhone;
 	JTextField txtId,txtFname,txtLname,txtNationality,txtEmail,txtPhone;
 	JComboBox cbxDepartment;
@@ -74,5 +76,13 @@ public class AddEmployee extends CFrame {
 		createGui(txtEmail,0,180,200,25,pCenter);
 		createGui(txtPhone,0,210,200,25,pCenter);
 		createGui(bAdd,40,240,120,25,pCenter);
+		bAdd.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		DbConnect dc = new DbConnect();	
+		dc.dbConn("INSERT INTO Employee VALUES ("+fn+","+ln+","+gd+","+nn+","+ad+","+pn+","+em+","+dm+","+dn+")");
 	}
 }
