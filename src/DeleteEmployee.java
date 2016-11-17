@@ -1,8 +1,10 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
 
-public class DeleteEmployee extends CFrame{	
+public class DeleteEmployee extends CFrame implements ActionListener{	
 	JLabel lblTitle,lblId;
 	JTextField txtId;
 	JButton bDelete;
@@ -36,5 +38,13 @@ public class DeleteEmployee extends CFrame{
 		bDelete = new JButton("Delete Employee");//initiate button
 		createGui(txtId,0,0,200,25,pCenter);//add textfields and such
 		createGui(bDelete,25,30,140,25,pCenter);
+		bDelete.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		DbConnect dc = new DbConnect();
+		dc.dbConn("SELECT Designation, HourlyRate from Designation Rate ");
 	}
 }
