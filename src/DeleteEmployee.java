@@ -45,6 +45,6 @@ public class DeleteEmployee extends CFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		DbConnect dc = new DbConnect();
-		dc.dbConn("SELECT Designation, HourlyRate from Designation Rate ");
+		dc.dbConn("SELECT Designation, HourlyRate from DesignationRate");
 	}
 }

@@ -22,10 +22,10 @@ public class DbConnect {
 			while(rs.next()){
 				String value = rs.getString("Designation");
 				System.out.println("ID: "+value);
-				rs.close();
-				stmt.close();
-				conn.close();
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
