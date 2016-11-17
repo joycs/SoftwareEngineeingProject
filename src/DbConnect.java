@@ -18,12 +18,13 @@ public class DbConnect {
 			stmt = conn.createStatement();
 			//String sql;
 			//sql = "SELECT Designation, HourlyRate from Designation Rate ";
-			ResultSet rs = stmt.executeQuery(s);
+			int rowNum = stmt.executeUpdate(s);
+			/*ResultSet rs = stmt.executeQuery(s);
 			while(rs.next()){
 				String value = rs.getString("Designation");
 				System.out.println("ID: "+value);
-			}
-			rs.close();
+			}*/
+			//rs.close();
 			stmt.close();
 			conn.close();
 		}catch(Exception e){
