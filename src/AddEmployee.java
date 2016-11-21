@@ -7,12 +7,15 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 public class AddEmployee extends CFrame implements ActionListener{
-	JLabel lblTitle,lblId,lblFname,lblLname,lblDepartment,lblGender,lblNationality,lblEmail,lblPhone;
-	JTextField txtId,txtFname,txtLname,txtNationality,txtEmail,txtPhone;
-	JComboBox cbxDepartment;
+	JLabel lblTitle,lblId,lblFname,lblLname,lblDepartment,lblGender,lblNationality,lblEmail,lblPhone,lblAddress,lblDesignation;
+	JTextField txtId,txtFname,txtLname,txtNationality,txtEmail,txtPhone,txtAddress;
+	JComboBox<String> cbxDepartment,cbxDesignation;
 	JRadioButton radMale,radFemale;
 	ButtonGroup radGroup;
 	JButton bAdd;
+	String[] departments = {"Code Developing Department","Science","Arts and Languages","Social Sciences"};
+	String[] designations = {"CEO","Manager","Supervisor","Assistant","Staff"};
+	String id,fn,ln,dp,gd,nt,em,pn,ad,ds;
 	
 	public static void main(String[] args){
 		new AddEmployee(50,50,1180,668);
@@ -41,6 +44,8 @@ public class AddEmployee extends CFrame implements ActionListener{
 		lblNationality = new JLabel("Nationality:");
 		lblEmail = new JLabel("Email:");
 		lblPhone = new JLabel("Phone Number:");
+		lblAddress = new JLabel("Address:");
+		lblDesignation = new JLabel("Designation:");
 		createGui(lblId,0,-10,300,50,pLeft);//add labels
 		createGui(lblFname,0,20,300,50,pLeft);
 		createGui(lblLname,0,50,300,50,pLeft);
@@ -49,6 +54,8 @@ public class AddEmployee extends CFrame implements ActionListener{
 		createGui(lblNationality,0,140,300,50,pLeft);
 		createGui(lblEmail,0,170,300,50,pLeft);
 		createGui(lblPhone,0,200,300,50,pLeft);
+		createGui(lblAddress,0,230,300,50,pLeft);
+		createGui(lblDesignation,0,260,300,50,pLeft);
 		//----------Center Panel---------------------------
 		JPanel pCenter = new JPanel();
 		pCenter.setLayout(null);
@@ -56,8 +63,9 @@ public class AddEmployee extends CFrame implements ActionListener{
 		txtId = new JTextField();//initiate textfields and such
 		txtFname = new JTextField();
 		txtLname = new JTextField();
-		cbxDepartment = new JComboBox();
+		cbxDepartment = new JComboBox<String>(departments);
 		radMale = new JRadioButton("Male");
+		radMale.setSelected(true);
 		radFemale = new JRadioButton("Female");
 		radGroup = new ButtonGroup();
 		radGroup.add(radMale);
@@ -65,6 +73,8 @@ public class AddEmployee extends CFrame implements ActionListener{
 		txtNationality = new JTextField();
 		txtEmail = new JTextField();
 		txtPhone = new JTextField();
+		txtAddress = new JTextField();
+		cbxDesignation = new JComboBox<String>(designations);
 		bAdd = new JButton("Add Employee");//initiate button
 		createGui(txtId,0,0,200,25,pCenter);//add textfields and such
 		createGui(txtFname,0,30,200,25,pCenter);
@@ -75,14 +85,28 @@ public class AddEmployee extends CFrame implements ActionListener{
 		createGui(txtNationality,0,150,200,25,pCenter);
 		createGui(txtEmail,0,180,200,25,pCenter);
 		createGui(txtPhone,0,210,200,25,pCenter);
-		createGui(bAdd,40,240,120,25,pCenter);
+		createGui(txtAddress,0,240,200,25,pCenter);
+		createGui(cbxDesignation,0,270,200,25,pCenter);
+		createGui(bAdd,40,300,120,25,pCenter);
 		bAdd.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
+		id = txtId.getText();
+		fn = txtFname.getText();
+		ln = txtLname.getText();
+		dp = cbxDepartment.getSelectedItem().toString();
+		if(radMale.isSelected())
+			gd = radMale.getText();
+		else gd = radFemale.getText();
+		nt = txtNationality.getText();
+		em = txtEmail.getText();
+		pn = txtPhone.getText();
+		ad = txtAddress.getText();
+		ds = cbxDesignation.getSelectedItem().toString();
 		DbConnect dc = new DbConnect();	
-		dc.dbConn("INSERT INTO Employee VALUES ("+fn+","+ln+","+gd+","+nn+","+ad+","+pn+","+em+","+dm+","+dn+")");
+		dc.dbConn("INSERT INTO Employee VALUES ('"+id+"','"+fn+"','"+ ln+"','"+ gd+"','"+ nt+"','"+ ad+"','"+ pn+"','"+ em+"','"+ dp+"','"+ ds+"')");
 	}
 }

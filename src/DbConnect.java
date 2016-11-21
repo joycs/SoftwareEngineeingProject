@@ -11,20 +11,18 @@ public class DbConnect {
 		Connection conn = null;
 		Statement stmt = null;
 		try{
+			//-----Register JDBC driver
 			Class.forName(JDBC_DRIVER);
+			
+			//-----Open a connection
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
+			
+			//-----Execute a query
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
-			//String sql;
-			//sql = "SELECT Designation, HourlyRate from Designation Rate ";
-			int rowNum = stmt.executeUpdate(s);
-			/*ResultSet rs = stmt.executeQuery(s);
-			while(rs.next()){
-				String value = rs.getString("Designation");
-				System.out.println("ID: "+value);
-			}*/
-			//rs.close();
+			stmt.executeUpdate(s);
+			System.out.println("Inserted records into the table...");
 			stmt.close();
 			conn.close();
 		}catch(Exception e){

@@ -45,7 +45,7 @@ public class DeleteEmployee extends CFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		DbConnect dc = new DbConnect();
-		int id = Integer.parseInt(txtId.getText().trim());		
+		int id = Integer.parseInt(txtId.getText().trim());
 		dc.dbConn("DELETE FROM Employee WHERE EmployeeID='" + id + "'");
 	}
 }
