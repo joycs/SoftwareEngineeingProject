@@ -45,7 +45,11 @@ public class DeleteEmployee extends CFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		DbConnect dc = new DbConnect();
+		try{
 		int id = Integer.parseInt(txtId.getText().trim());
-		dc.dbConn("DELETE FROM Employee WHERE EmployeeID='" + id + "'");
+		dc.dbConn("DELETE FROM Employee WHERE EmployeeID='" + id + "'","delete");
+		}catch(NumberFormatException nf){
+			System.out.println("The id does not exist");
+		}
 	}
 }

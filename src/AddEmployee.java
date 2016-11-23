@@ -15,7 +15,8 @@ public class AddEmployee extends CFrame implements ActionListener{
 	JButton bAdd;
 	String[] departments = {"Code Developing Department","Science","Arts and Languages","Social Sciences"};
 	String[] designations = {"CEO","Manager","Supervisor","Assistant","Staff"};
-	String id,fn,ln,dp,gd,nt,em,pn,ad,ds;
+	int id,pn;
+	String fn,ln,dp,gd,nt,em,ad,ds;
 	
 	public static void main(String[] args){
 		new AddEmployee(50,50,1180,668);
@@ -94,7 +95,8 @@ public class AddEmployee extends CFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		id = txtId.getText();
+		try{
+		id = Integer.parseInt(txtId.getText());		
 		fn = txtFname.getText();
 		ln = txtLname.getText();
 		dp = cbxDepartment.getSelectedItem().toString();
@@ -103,10 +105,13 @@ public class AddEmployee extends CFrame implements ActionListener{
 		else gd = radFemale.getText();
 		nt = txtNationality.getText();
 		em = txtEmail.getText();
-		pn = txtPhone.getText();
+		pn = Integer.parseInt(txtPhone.getText());
 		ad = txtAddress.getText();
 		ds = cbxDesignation.getSelectedItem().toString();
 		DbConnect dc = new DbConnect();	
-		dc.dbConn("INSERT INTO Employee VALUES ('"+id+"','"+fn+"','"+ ln+"','"+ gd+"','"+ nt+"','"+ ad+"','"+ pn+"','"+ em+"','"+ dp+"','"+ ds+"')");
+		dc.dbConn("INSERT INTO Employee VALUES ('"+id+"','"+fn+"','"+ ln+"','"+ gd+"','"+ nt+"','"+ ad+"','"+ pn+"','"+ em+"','"+ dp+"','"+ ds+"')","insert");
+		}catch(NumberFormatException nf){
+			System.out.println("Make sure you've entered id and phone number correctly");
+		}
 	}
 }
